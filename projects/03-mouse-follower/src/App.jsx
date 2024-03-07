@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react"
 
-const FollowMouse = () => {
+function App() {
   const [enable, setEnable] = useState(false)
   const [position, setPosition] = useState({x:0, y:0})
 
@@ -17,14 +17,13 @@ const FollowMouse = () => {
     }
 
     return () => {
-      console.log('cleanup')
       window.removeEventListener('pointermove',handleMove)
       setPosition({x:0, y:0})
     }
   },[enable])
 
   return (
-    <>
+    <main>
     <div style={{
       position: 'absolute',
       backgroundColor: 'rgba(0,0,0,0.5)',
@@ -39,17 +38,7 @@ const FollowMouse = () => {
       transform: `translate(${position.x}px,${position.y}px)`
     }}/>
     <button onClick={() => setEnable(!enable)}>{enable ? 'Desactivar':'Activar'} seguimiento</button>
-    </>
-  )
-}
-
-function App() {
-  const [mounted, setMounted] = useState(true)
-  return(
-  <main>
-    {mounted && <FollowMouse/>}
-    <button onClick={() => setMounted(!mounted)}>{mounted ? 'Desmontar':'Montar'} componente</button>
-  </main>
+    </main>
   )
 }
 
