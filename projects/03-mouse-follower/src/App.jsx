@@ -3,7 +3,7 @@ import { useEffect, useState } from "react"
 function App() {
   const [enable, setEnable] = useState(false)
   const [position, setPosition] = useState({x:0, y:0})
-
+  //Pointer move
   useEffect(() => {
     console.log('effect',{enable})
 
@@ -19,6 +19,15 @@ function App() {
     return () => {
       window.removeEventListener('pointermove',handleMove)
       setPosition({x:0, y:0})
+    }
+  },[enable])
+
+  //Chhange body className
+  useEffect(() => {
+    document.body.classList.toggle('no-cursor', enable)
+
+    return () => {
+      document.body.classList.remove('no-cursor')
     }
   },[enable])
 
